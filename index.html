@@ -7,47 +7,102 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a2e;
+      --text-secondary: #6b7280;
+      --text-muted: #9ca3af;
+      --card-bg: #f8fafc;
+      --card-border: #e5e7eb;
+      --skill-bg: #ede9fe;
+      --skill-text: #5b21b6;
+      --link: #667eea;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f1a;
+      --text: #e5e7eb;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --card-bg: #1a1a2e;
+      --card-border: #2d2d44;
+      --skill-bg: #2d2d44;
+      --skill-text: #a78bfa;
+      --link: #a78bfa;
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #1a1a2e; background: #ffffff; line-height: 1.6; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; transition: background 0.3s, color 0.3s; }
     .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
 
-    header { text-align: center; margin-bottom: 64px; }
+    /* Dark mode toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--card-border);
+      background: var(--card-bg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      z-index: 1000;
+      transition: all 0.3s;
+    }
+    .theme-toggle:hover { transform: scale(1.1); }
+
+    header { text-align: center; margin-bottom: 64px; padding-top: 20px; }
     .avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; font-weight: 700; }
     h1 { font-size: 42px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
-    .subtitle { font-size: 20px; color: #6b7280; margin-bottom: 12px; font-weight: 400; }
-    .location { font-size: 15px; color: #9ca3af; margin-bottom: 24px; }
+    .subtitle { font-size: 20px; color: var(--text-secondary); margin-bottom: 12px; font-weight: 400; }
+    .location { font-size: 15px; color: var(--text-muted); margin-bottom: 24px; }
     .socials { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .socials a { text-decoration: none; color: #667eea; font-weight: 600; padding: 10px 20px; border: 2px solid #667eea; border-radius: 8px; transition: all 0.2s; }
-    .socials a:hover { background: #667eea; color: white; }
+    .socials a { text-decoration: none; color: var(--link); font-weight: 600; padding: 10px 20px; border: 2px solid var(--link); border-radius: 8px; transition: all 0.2s; }
+    .socials a:hover { background: var(--link); color: white; }
     .socials a.primary { color: white; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; }
     .socials a.primary:hover { opacity: 0.9; }
 
     section { margin-bottom: 64px; }
-    h2 { font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #1a1a2e; }
+    h2 { font-size: 24px; font-weight: 700; margin-bottom: 24px; color: var(--text); }
 
-    .about { padding: 32px; background: #f8fafc; border-radius: 16px; border-left: 4px solid #667eea; }
-    .about p { font-size: 16px; line-height: 1.7; color: #4b5563; }
+    .about { padding: 32px; background: var(--card-bg); border-radius: 16px; border-left: 4px solid var(--link); transition: background 0.3s; }
+    .about p { font-size: 16px; line-height: 1.7; color: var(--text-secondary); }
 
     .skills { display: flex; flex-wrap: wrap; gap: 10px; }
-    .skill { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
-    .skill.lang { background: #ede9fe; color: #5b21b6; }
-    .skill.web { background: #dbeafe; color: #1e40af; }
-    .skill.tool { background: #fef3c7; color: #92400e; }
-    .skill.other { background: #d1fae5; color: #065f46; }
+    .skill { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; background: var(--skill-bg); color: var(--skill-text); transition: all 0.3s; }
 
     .timeline { display: flex; flex-direction: column; gap: 24px; }
-    .job { border: 1px solid #e5e7eb; border-radius: 16px; padding: 24px; background: #ffffff; }
+    .job { border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; background: var(--card-bg); transition: all 0.3s; }
     .job-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 4px; }
-    .job-title { font-size: 17px; font-weight: 700; color: #1a1a2e; }
-    .job-date { font-size: 13px; color: #9ca3af; font-weight: 500; white-space: nowrap; }
-    .job-company { font-size: 14px; color: #667eea; font-weight: 600; margin-bottom: 8px; }
-    .job ul { margin-left: 18px; color: #4b5563; font-size: 14.5px; line-height: 1.7; }
+    .job-title { font-size: 17px; font-weight: 700; color: var(--text); }
+    .job-date { font-size: 13px; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
+    .job-company { font-size: 14px; color: var(--link); font-weight: 600; margin-bottom: 8px; }
+    .job ul { margin-left: 18px; color: var(--text-secondary); font-size: 14.5px; line-height: 1.7; }
     .job li { margin-bottom: 4px; }
 
     .edu-grid { display: grid; gap: 16px; }
-    .edu-card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; }
-    .edu-title { font-weight: 700; color: #1a1a2e; font-size: 15px; margin-bottom: 4px; }
-    .edu-meta { font-size: 13px; color: #6b7280; }
+    .edu-card { border: 1px solid var(--card-border); border-radius: 12px; padding: 20px; background: var(--card-bg); transition: all 0.3s; }
+    .edu-title { font-weight: 700; color: var(--text); font-size: 15px; margin-bottom: 4px; }
+    .edu-meta { font-size: 13px; color: var(--text-secondary); }
+
+    .project-grid { display: grid; gap: 24px; }
+    .project-card { border: 1px solid var(--card-border); border-radius: 16px; padding: 28px; background: var(--card-bg); transition: all 0.3s; }
+    .project-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+    .project-header h3 { font-size: 20px; font-weight: 700; color: var(--text); }
+    .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag { padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+    .tag.gray { background: var(--card-bg); color: var(--text-secondary); border: 1px solid var(--card-border); }
+    .tag.green { background: #d1fae5; color: #065f46; }
+    .project-desc { font-size: 15px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 16px; }
+    .tech-stack { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; font-size: 13px; color: var(--text-muted); }
+    .project-links { display: flex; gap: 16px; }
+    .project-links a { text-decoration: none; color: var(--link); font-weight: 600; font-size: 14px; }
+    .project-links a:hover { text-decoration: underline; }
 
     .cv-section { text-align: center; padding: 40px 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; color: white; }
     .cv-section h2 { color: white; margin-bottom: 12px; font-size: 26px; }
@@ -55,16 +110,19 @@
     .cv-btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #667eea; background: white; font-weight: 700; padding: 14px 28px; border-radius: 10px; font-size: 15px; transition: transform 0.2s; }
     .cv-btn:hover { transform: translateY(-2px); }
 
-    footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #e5e7eb; color: #9ca3af; font-size: 14px; }
+    footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--card-border); color: var(--text-muted); font-size: 14px; transition: all 0.3s; }
 
     @media (max-width: 600px) {
       h1 { font-size: 30px; }
       .subtitle { font-size: 17px; }
       .job-header { flex-direction: column; }
+      .theme-toggle { width: 40px; height: 40px; font-size: 16px; top: 10px; right: 10px; }
     }
   </style>
 </head>
 <body>
+  <button class="theme-toggle" id="themeToggle" title="Cambiar modo">🌙</button>
+
   <div class="container">
 
     <header>
@@ -73,8 +131,8 @@
       <p class="subtitle">Desarrollador de Aplicaciones Multiplataforma</p>
       <p class="location">Sevilla · ruben.ghumanes@gmail.com · 634 646 277</p>
       <div class="socials">
-        <a href="https://github.com/KlNGSLAY3R">GitHub</a>
-        <a href="https://www.linkedin.com/in/ruben-gutierrez-humanes/">LinkedIn</a>
+        <a href="https://github.com/KlNGSLAY3R" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/ruben-gutierrez-humanes/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="mailto:ruben.ghumanes@gmail.com" class="primary">Contacto</a>
       </div>
     </header>
@@ -89,23 +147,23 @@
     <section>
       <h2>Tecnologías</h2>
       <div class="skills">
-        <span class="skill lang">C#</span>
-        <span class="skill lang">Python</span>
-        <span class="skill lang">SQL</span>
-        <span class="skill lang">Java</span>
-        <span class="skill lang">VBA</span>
-        <span class="skill web">ASP.NET Core</span>
-        <span class="skill web">JavaScript</span>
-        <span class="skill web">HTML</span>
-        <span class="skill web">React</span>
-        <span class="skill web">Laravel</span>
-        <span class="skill tool">Visual Studio</span>
-        <span class="skill tool">Unity</span>
-        <span class="skill tool">Eclipse</span>
-        <span class="skill tool">IntelliJ</span>
-        <span class="skill tool">Android Studio</span>
-        <span class="skill other">Jira</span>
-        <span class="skill other">GitHub</span>
+        <span class="skill">C#</span>
+        <span class="skill">Python</span>
+        <span class="skill">SQL</span>
+        <span class="skill">Java</span>
+        <span class="skill">VBA</span>
+        <span class="skill">ASP.NET Core</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">HTML</span>
+        <span class="skill">React</span>
+        <span class="skill">Laravel</span>
+        <span class="skill">Visual Studio</span>
+        <span class="skill">Unity</span>
+        <span class="skill">Eclipse</span>
+        <span class="skill">IntelliJ</span>
+        <span class="skill">Android Studio</span>
+        <span class="skill">Jira</span>
+        <span class="skill">GitHub</span>
       </div>
     </section>
 
@@ -187,6 +245,29 @@
     </section>
 
     <section>
+      <h2>Proyectos Destacados</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-header">
+            <h3>Nombre del Proyecto</h3>
+            <div class="tags">
+              <span class="tag gray">Web App</span>
+              <span class="tag green">Activo</span>
+            </div>
+          </div>
+          <p class="project-desc">Breve descripción del proyecto. Explica qué problema resuelve, para quién es y qué tecnologías usaste.</p>
+          <div class="tech-stack">
+            <span>React</span><span>•</span><span>Node.js</span><span>•</span><span>PostgreSQL</span>
+          </div>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener noreferrer">Ver Demo →</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">Código Fuente →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
       <div class="cv-section">
         <h2>Currículum Vitae</h2>
         <p>Descarga mi CV en PDF para más detalles.</p>
@@ -202,5 +283,26 @@
     </footer>
 
   </div>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+      toggle.textContent = '☀️';
+    }
+    toggle.addEventListener('click', () => {
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        toggle.textContent = '🌙';
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        toggle.textContent = '☀️';
+      }
+    });
+  </script>
 </body>
 </html>

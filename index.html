@@ -17,6 +17,7 @@
       --skill-bg: #ede9fe;
       --skill-text: #5b21b6;
       --link: #667eea;
+      --nav-bg: rgba(255,255,255,0.85);
     }
 
     [data-theme="dark"] {
@@ -29,16 +30,73 @@
       --skill-bg: #2d2d44;
       --skill-text: #a78bfa;
       --link: #a78bfa;
+      --nav-bg: rgba(15,15,26,0.85);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; transition: background 0.3s, color 0.3s; }
     .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+
+    /* Nav */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      transition: all 0.3s;
+    }
+    .nav-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--link);
+      background: var(--card-bg);
+    }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 22px;
+      cursor: pointer;
+    }
 
     /* Dark mode toggle */
     .theme-toggle {
       position: fixed;
-      top: 20px;
+      top: 76px;
       right: 20px;
       width: 48px;
       height: 48px;
@@ -47,7 +105,7 @@
       background: var(--card-bg);
       cursor: pointer;
       display: flex;
-      align-items: center; 
+      align-items: center;
       justify-content: center;
       font-size: 20px;
       line-height: 1;
@@ -57,7 +115,7 @@
     }
     .theme-toggle:hover { transform: scale(1.1); }
 
-    header { text-align: center; margin-bottom: 64px; padding-top: 20px; }
+    header { text-align: center; margin-bottom: 64px; padding-top: 80px; }
     .avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; font-weight: 700; }
     h1 { font-size: 42px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
     .subtitle { font-size: 20px; color: var(--text-secondary); margin-bottom: 12px; font-weight: 400; }
@@ -114,15 +172,35 @@
 
     footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--card-border); color: var(--text-muted); font-size: 14px; transition: all 0.3s; }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
+      .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; background: var(--nav-bg); backdrop-filter: blur(12px); flex-direction: column; padding: 16px 24px; gap: 4px; border-bottom: 1px solid var(--card-border); }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 10px 12px; width: 100%; }
+      .nav-toggle { display: block; }
       h1 { font-size: 30px; }
       .subtitle { font-size: 17px; }
       .job-header { flex-direction: column; }
-      .theme-toggle { width: 40px; height: 40px; font-size: 16px; top: 10px; right: 10px; }
+      .theme-toggle { top: 66px; right: 10px; width: 40px; height: 40px; font-size: 16px; }
     }
   </style>
 </head>
 <body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">RG</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#tecnologias">Tecnologías</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#formacion">Formación</a>
+        <a href="#cursos">Cursos</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#cv">CV</a>
+      </div>
+    </div>
+  </nav>
+
   <button class="theme-toggle" id="themeToggle" title="Cambiar modo">🌙</button>
 
   <div class="container">
@@ -135,18 +213,17 @@
       <div class="socials">
         <a href="https://github.com/KlNGSLAY3R" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="https://www.linkedin.com/in/ruben-gutierrez-humanes/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="mailto:ruben.ghumanes@gmail.com" class="primary">Contacto</a>
       </div>
     </header>
 
-    <section>
+    <section id="sobre-mi">
       <div class="about">
         <h2>Sobre mí</h2>
         <p>Especialista IT con más de 4 años de experiencia en entornos críticos y de alta exigencia (aeronáutico y farmacéutico). Mi prioridad es aportar soluciones técnicas que se traduzcan en estabilidad y un ahorro real de tiempo para el equipo.</p>
       </div>
     </section>
 
-    <section>
+    <section id="tecnologias">
       <h2>Tecnologías</h2>
       <div class="skills">
         <span class="skill">C#</span>
@@ -169,7 +246,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="experiencia">
       <h2>Experiencia Laboral</h2>
       <div class="timeline">
         <div class="job">
@@ -218,7 +295,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="formacion">
       <h2>Formación Académica</h2>
       <div class="edu-grid">
         <div class="edu-card">
@@ -232,7 +309,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="cursos">
       <h2>Cursos</h2>
       <div class="edu-grid">
         <div class="edu-card">
@@ -246,18 +323,18 @@
       </div>
     </section>
 
-    <section>
+    <section id="proyectos">
       <h2>Proyectos Destacados</h2>
       <div class="project-grid">
         <div class="project-card">
           <div class="project-header">
-            <h3>Nombre del Proyecto</h3>
+            <h3>Proyecto en construcción...</h3>
             <div class="tags">
               <span class="tag gray">Web App</span>
               <span class="tag green">Activo</span>
             </div>
           </div>
-          <p class="project-desc">Breve descripción del proyecto. Explica qué problema resuelve, para quién es y qué tecnologías usaste.</p>
+          <p class="project-desc">🚧</p>
           <div class="tech-stack">
             <span>React</span><span>•</span><span>Node.js</span><span>•</span><span>PostgreSQL</span>
           </div>
@@ -269,18 +346,18 @@
       </div>
     </section>
 
-    <section>
+    <section id="cv">
       <div class="cv-section">
         <h2>Currículum Vitae</h2>
         <p>Descarga mi CV en PDF para más detalles.</p>
-        <a href="CV_RGH_2026.pdf" class="cv-btn" download>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          CV Español
-        </a>
-        <a href="enCV_RGH_2026.pdf" class="cv-btn" download>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          English CV
-        </a>
+          <a href="CV_RGH_2026.pdf" class="cv-btn" download style="margin-bottom: 12px; display: inline-block;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            CV Español
+          </a>
+          <a href="enCV_RGH_2026.pdf" class="cv-btn" download>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            English CV
+          </a>
       </div>
     </section>
 
@@ -308,6 +385,17 @@
         localStorage.setItem('theme', 'dark');
         toggle.textContent = '☀️';
       }
+    });
+
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
     });
   </script>
 </body>

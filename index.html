@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rubén Gutiérrez — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: #1a1a2e; background: #ffffff; line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+
+    header { text-align: center; margin-bottom: 64px; }
+    .avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; font-weight: 700; }
+    h1 { font-size: 42px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
+    .subtitle { font-size: 20px; color: #6b7280; margin-bottom: 12px; font-weight: 400; }
+    .location { font-size: 15px; color: #9ca3af; margin-bottom: 24px; }
+    .socials { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .socials a { text-decoration: none; color: #667eea; font-weight: 600; padding: 10px 20px; border: 2px solid #667eea; border-radius: 8px; transition: all 0.2s; }
+    .socials a:hover { background: #667eea; color: white; }
+    .socials a.primary { color: white; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; }
+    .socials a.primary:hover { opacity: 0.9; }
+
+    section { margin-bottom: 64px; }
+    h2 { font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #1a1a2e; }
+
+    .about { padding: 32px; background: #f8fafc; border-radius: 16px; border-left: 4px solid #667eea; }
+    .about p { font-size: 16px; line-height: 1.7; color: #4b5563; }
+
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+    .skill.lang { background: #ede9fe; color: #5b21b6; }
+    .skill.web { background: #dbeafe; color: #1e40af; }
+    .skill.tool { background: #fef3c7; color: #92400e; }
+    .skill.other { background: #d1fae5; color: #065f46; }
+
+    .timeline { display: flex; flex-direction: column; gap: 24px; }
+    .job { border: 1px solid #e5e7eb; border-radius: 16px; padding: 24px; background: #ffffff; }
+    .job-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 4px; }
+    .job-title { font-size: 17px; font-weight: 700; color: #1a1a2e; }
+    .job-date { font-size: 13px; color: #9ca3af; font-weight: 500; white-space: nowrap; }
+    .job-company { font-size: 14px; color: #667eea; font-weight: 600; margin-bottom: 8px; }
+    .job ul { margin-left: 18px; color: #4b5563; font-size: 14.5px; line-height: 1.7; }
+    .job li { margin-bottom: 4px; }
+
+    .edu-grid { display: grid; gap: 16px; }
+    .edu-card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; }
+    .edu-title { font-weight: 700; color: #1a1a2e; font-size: 15px; margin-bottom: 4px; }
+    .edu-meta { font-size: 13px; color: #6b7280; }
+
+    .cv-section { text-align: center; padding: 40px 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; color: white; }
+    .cv-section h2 { color: white; margin-bottom: 12px; font-size: 26px; }
+    .cv-section p { font-size: 15px; opacity: 0.9; margin-bottom: 20px; }
+    .cv-btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #667eea; background: white; font-weight: 700; padding: 14px 28px; border-radius: 10px; font-size: 15px; transition: transform 0.2s; }
+    .cv-btn:hover { transform: translateY(-2px); }
+
+    footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid #e5e7eb; color: #9ca3af; font-size: 14px; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 30px; }
+      .subtitle { font-size: 17px; }
+      .job-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <div class="avatar">RG</div>
+      <h1>Rubén Gutiérrez</h1>
+      <p class="subtitle">Desarrollador de Aplicaciones Multiplataforma</p>
+      <p class="location">Sevilla · ruben.ghumanes@gmail.com · 634 646 277</p>
+      <div class="socials">
+        <a href="https://github.com/KINGSLAY3R">GitHub</a>
+        <a href="https://linkedin.com/in/rubén-gutiérrez">LinkedIn</a>
+        <a href="mailto:ruben.ghumanes@gmail.com" class="primary">Contacto</a>
+      </div>
+    </header>
+
+    <section>
+      <div class="about">
+        <h2>Sobre mí</h2>
+        <p>Especialista IT con más de 4 años de experiencia en entornos críticos y de alta exigencia (aeronáutico y farmacéutico). Mi prioridad es aportar soluciones técnicas que se traduzcan en estabilidad y un ahorro real de tiempo para el equipo.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tecnologías</h2>
+      <div class="skills">
+        <span class="skill lang">C#</span>
+        <span class="skill lang">Python</span>
+        <span class="skill lang">SQL</span>
+        <span class="skill lang">Java</span>
+        <span class="skill lang">VBA</span>
+        <span class="skill web">ASP.NET Core</span>
+        <span class="skill web">JavaScript</span>
+        <span class="skill web">HTML</span>
+        <span class="skill web">React</span>
+        <span class="skill web">Laravel</span>
+        <span class="skill tool">Visual Studio</span>
+        <span class="skill tool">Unity</span>
+        <span class="skill tool">Eclipse</span>
+        <span class="skill tool">IntelliJ</span>
+        <span class="skill tool">Android Studio</span>
+        <span class="skill other">Jira</span>
+        <span class="skill other">GitHub</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Experiencia Laboral</h2>
+      <div class="timeline">
+        <div class="job">
+          <div class="job-header">
+            <span class="job-title">Consultor Informático</span>
+            <span class="job-date">Ene 2025 – Ago 2025</span>
+          </div>
+          <div class="job-company">Alten para Airbus Defensa y Espacio</div>
+          <ul>
+            <li>Consultoría técnica para el desarrollo de aplicaciones internas utilizando C# y ASP.NET.</li>
+            <li>Automatización de procesos a través de Macros Excel con VBA.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <div class="job-header">
+            <span class="job-title">Soporte IT</span>
+            <span class="job-date">Jul 2023 – Ene 2025</span>
+          </div>
+          <div class="job-company">Akkodis para Airbus Defensa y Espacio</div>
+          <ul>
+            <li>Administración de sistemas y soporte técnico L2 en entorno aeronáutico.</li>
+            <li>Desarrollo y mantenimiento de aplicaciones con Python, Excel VBA y App Scripts.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <div class="job-header">
+            <span class="job-title">Soporte Técnico</span>
+            <span class="job-date">Feb 2022 – Jul 2023</span>
+          </div>
+          <div class="job-company">Bidafarma</div>
+          <ul>
+            <li>Resolución de problemas y errores al manejar software farmacéutico.</li>
+            <li>Tratamiento de bases de datos con SQL y Access.</li>
+          </ul>
+        </div>
+        <div class="job">
+          <div class="job-header">
+            <span class="job-title">Formación en Centros de Trabajo</span>
+            <span class="job-date">Sept 2021 – Dic 2021</span>
+          </div>
+          <div class="job-company">10Code</div>
+          <ul>
+            <li>Uso de Laravel y React.js para desarrollo backend y bugfixing.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Formación Académica</h2>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-title">Grado Superior en Desarrollo de Aplicaciones Multiplataforma</div>
+          <div class="edu-meta">Ilerna · 2020 – 2021</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-title">Grado en Ingeniería Informática</div>
+          <div class="edu-meta">Estudios parciales · 120 créditos completados</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Cursos</h2>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-title">Programación .Net (C#) y Testing</div>
+          <div class="edu-meta">EOI · 2026 · 208 horas</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-title">Soporte Técnico / IT Support</div>
+          <div class="edu-meta">Coursera & Google · 2020</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="cv-section">
+        <h2>Currículum Vitae</h2>
+        <p>Descarga mi CV en PDF para más detalles.</p>
+        <a href="CV_RGH_2026.pdf" class="cv-btn" download>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Descargar CV
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Rubén Gutiérrez. Construido con HTML y CSS.
+    </footer>
+
+  </div>
+</body>
+</html>

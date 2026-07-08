@@ -89,6 +89,11 @@
       color: var(--link);
       background: var(--card-bg);
     }
+    .nav-links a.active {
+      color: var(--link);
+      background: var(--card-bg);
+    }
+    .nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
     .nav-right {
       display: flex;
       align-items: center;
@@ -141,7 +146,7 @@
     .socials a.primary { color: white; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; }
     .socials a.primary:hover { opacity: 0.9; }
 
-    section { margin-bottom: 64px; }
+    section { margin-bottom: 64px; scroll-margin-top: 80px; }
     h2 { font-size: 24px; font-weight: 700; margin-bottom: 24px; color: var(--text); }
 
     .about { padding: 32px; background: var(--card-bg); border-radius: 16px; border-left: 4px solid var(--link); transition: background 0.3s; }
@@ -150,17 +155,38 @@
     .skills { display: flex; flex-wrap: wrap; gap: 10px; }
     .skill { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; background: var(--skill-bg); color: var(--skill-text); transition: all 0.3s; }
 
-    .timeline { display: flex; flex-direction: column; gap: 24px; }
-    .job { border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; background: var(--card-bg); transition: all 0.3s; }
+    .timeline { position: relative; display: flex; flex-direction: column; gap: 24px; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 6px; bottom: 6px;
+      width: 2px;
+      background: var(--card-border);
+    }
+    .job { position: relative; border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; background: var(--card-bg); transition: all 0.3s; }
+    .job:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .job::before {
+      content: '';
+      position: absolute;
+      left: -24px; top: 27px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--link);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 1px var(--card-border);
+      transition: background 0.3s, box-shadow 0.3s;
+      z-index: 1;
+    }
     .job-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 4px; }
     .job-title { font-size: 17px; font-weight: 700; color: var(--text); }
-    .job-date { font-size: 13px; color: var(--text-muted); font-weight: 500; white-space: nowrap; }
+    .job-date { font-size: 13px; color: var(--text-muted); font-weight: 500; white-space: nowrap; font-family: 'SF Mono', 'Cascadia Code', ui-monospace, monospace; letter-spacing: -0.2px; }
     .job-company { font-size: 14px; color: var(--link); font-weight: 600; margin-bottom: 8px; }
     .job ul { margin-left: 18px; color: var(--text-secondary); font-size: 14.5px; line-height: 1.7; }
     .job li { margin-bottom: 4px; }
 
     .edu-grid { display: grid; gap: 16px; }
     .edu-card { border: 1px solid var(--card-border); border-radius: 12px; padding: 20px; background: var(--card-bg); transition: all 0.3s; }
+    .edu-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
     .edu-title { font-weight: 700; color: var(--text); font-size: 15px; margin-bottom: 4px; }
     .edu-meta { font-size: 13px; color: var(--text-secondary); }
 
@@ -188,8 +214,22 @@
     footer { text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--card-border); color: var(--text-muted); font-size: 14px; transition: all 0.3s; }
 
     @media (max-width: 750px) {
-      .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; background: var(--nav-bg); backdrop-filter: blur(12px); flex-direction: column; padding: 16px 24px; gap: 4px; border-bottom: 1px solid var(--card-border); }
-      .nav-links.open { display: flex; }
+      .nav-links {
+        display: flex;
+        position: absolute;
+        top: 56px; left: 0; right: 0;
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        padding: 0 24px;
+        gap: 4px;
+        border-bottom: 1px solid var(--card-border);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+      }
+      .nav-links.open { max-height: 400px; opacity: 1; padding: 16px 24px; }
       .nav-links a { padding: 10px 12px; width: 100%; }
       .nav-toggle { display: block; }
       .nav-right { gap: 6px; }
@@ -197,6 +237,24 @@
       h1 { font-size: 30px; }
       .subtitle { font-size: 17px; }
       .job-header { flex-direction: column; }
+      .timeline { padding-left: 22px; }
+      .job::before { left: -18px; }
+    }
+
+    /* Accesibilidad: foco visible consistente */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--link);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
@@ -522,6 +580,26 @@
         navLinks.classList.remove('open');
       });
     });
+
+    // Sombra en el nav al hacer scroll
+    const navEl = document.querySelector('.nav');
+    window.addEventListener('scroll', () => {
+      navEl.classList.toggle('scrolled', window.scrollY > 8);
+    }, { passive: true });
+
+    // Resalta en el menú la sección que se está viendo (scrollspy)
+    const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sections = [...document.querySelectorAll('section[id]')];
+    if ('IntersectionObserver' in window && sections.length) {
+      const setActive = (id) => {
+        navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      };
+      const spy = new IntersectionObserver((entries) => {
+        const visible = entries.filter(e => e.isIntersecting);
+        if (visible.length) setActive(visible[0].target.id);
+      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+      sections.forEach(sec => spy.observe(sec));
+    }
   </script>
 </body>
 </html>
